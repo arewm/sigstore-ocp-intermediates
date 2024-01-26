@@ -3,28 +3,28 @@ RUN microdnf install -y gzip && gzip /usr/local/bin/cosign
 FROM quay.io/redhat-user-workloads/rhtas-tenant/cli-1-0-gamma/gitsign-cli-0-8@sha256:b8fae228a3e6dd53bfae8f23d44c8e08b4997a62f429f416401657fd54024d83 AS gitsign-image
 FROM quay.io/redhat-user-workloads/rhtas-tenant/cli-1-0-gamma/rekor-cli-1-3@sha256:b94954f6f82d9e5743c368a974a9d96c640e1ca7ba985fd3a86df5a989b8dd12 AS rekor-image
 
-FROM registry.redhat.io/ubi9/ubi:latest
+FROM scratch
 
-COPY --from=cosign-image /usr/local/bin/cosign-darwin-amd64.gz /copies/cosign
-COPY --from=cosign-image /usr/local/bin/cosign-darwin-arm64.gz /copies/cosign
-COPY --from=cosign-image /usr/local/bin/cosign-linux-amd64.gz /copies/cosign
-COPY --from=cosign-image /usr/local/bin/cosign-linux-arm64.gz /copies/cosign
-COPY --from=cosign-image /usr/local/bin/cosign-linux-ppc64le.gz /copies/cosign
-COPY --from=cosign-image /usr/local/bin/cosign-linux-s390x.gz /copies/cosign
-COPY --from=cosign-image /usr/local/bin/cosign-windows-amd64.gz /copies/cosign
+COPY --from=cosign-image /usr/local/bin/cosign-darwin-amd64.gz /copies/cosign/
+COPY --from=cosign-image /usr/local/bin/cosign-darwin-arm64.gz /copies/cosign/
+COPY --from=cosign-image /usr/local/bin/cosign-linux-amd64.gz /copies/cosign/
+COPY --from=cosign-image /usr/local/bin/cosign-linux-arm64.gz /copies/cosign/
+COPY --from=cosign-image /usr/local/bin/cosign-linux-ppc64le.gz /copies/cosign/
+COPY --from=cosign-image /usr/local/bin/cosign-linux-s390x.gz /copies/cosign/
+COPY --from=cosign-image /usr/local/bin/cosign-windows-amd64.gz /copies/cosign/
 
-COPY --from=gitsign-image /usr/local/bin/gitsign_cli_darwin_amd64.gz /copies/gitsign
-COPY --from=gitsign-image /usr/local/bin/gitsign_cli_darwin_arm64.gz /copies/gitsign
-COPY --from=gitsign-image /usr/local/bin/gitsign_cli_linux_amd64.gz /copies/gitsign
-COPY --from=gitsign-image /usr/local/bin/gitsign_cli_linux_arm64.gz /copies/gitsign
-COPY --from=gitsign-image /usr/local/bin/gitsign_cli_linux_ppc64le.gz /copies/gitsign
-COPY --from=gitsign-image /usr/local/bin/gitsign_cli_linux_s390x.gz /copies/gitsign
-COPY --from=gitsign-image /usr/local/bin/gitsign_cli_windows_amd64.exe.gz /copies/gitsign
+COPY --from=gitsign-image /usr/local/bin/gitsign_cli_darwin_amd64.gz /copies/gitsign/
+COPY --from=gitsign-image /usr/local/bin/gitsign_cli_darwin_arm64.gz /copies/gitsign/
+COPY --from=gitsign-image /usr/local/bin/gitsign_cli_linux_amd64.gz /copies/gitsign/
+COPY --from=gitsign-image /usr/local/bin/gitsign_cli_linux_arm64.gz /copies/gitsign/
+COPY --from=gitsign-image /usr/local/bin/gitsign_cli_linux_ppc64le.gz /copies/gitsign/
+COPY --from=gitsign-image /usr/local/bin/gitsign_cli_linux_s390x.gz /copies/gitsign/
+COPY --from=gitsign-image /usr/local/bin/gitsign_cli_windows_amd64.exe.gz /copies/gitsign/
 
-COPY --from=rekor-image /usr/local/bin/rekor_cli_darwin_amd64.gz /copies/rekor
-COPY --from=rekor-image /usr/local/bin/rekor_cli_darwin_arm64.gz /copies/rekor
-COPY --from=rekor-image /usr/local/bin/rekor_cli_linux_amd64.gz /copies/rekor
-COPY --from=rekor-image /usr/local/bin/rekor_cli_linux_arm64.gz /copies/rekor
-COPY --from=rekor-image /usr/local/bin/rekor_cli_linux_ppc64le.gz /copies/rekor
-COPY --from=rekor-image /usr/local/bin/rekor_cli_linux_s390x.gz /copies/rekor
-COPY --from=rekor-image /usr/local/bin/rekor_cli_windows_amd64.exe.gz /copies/rekor
+COPY --from=rekor-image /usr/local/bin/rekor_cli_darwin_amd64.gz /copies/rekor/
+COPY --from=rekor-image /usr/local/bin/rekor_cli_darwin_arm64.gz /copies/rekor/
+COPY --from=rekor-image /usr/local/bin/rekor_cli_linux_amd64.gz /copies/rekor/
+COPY --from=rekor-image /usr/local/bin/rekor_cli_linux_arm64.gz /copies/rekor/
+COPY --from=rekor-image /usr/local/bin/rekor_cli_linux_ppc64le.gz /copies/rekor/
+COPY --from=rekor-image /usr/local/bin/rekor_cli_linux_s390x.gz /copies/rekor/
+COPY --from=rekor-image /usr/local/bin/rekor_cli_windows_amd64.exe.gz /copies/rekor/

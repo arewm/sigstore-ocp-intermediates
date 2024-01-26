@@ -1,0 +1,9 @@
+FROM registry.redhat.io/rhtas-tech-preview/ec-rhel9:1.0.alpha-1705963542@sha256:6aca9b2e9fde177d1398820b4b0609865dc2b0573c2d9e6d475e515a6a123f1c AS ec-image
+FROM scratch
+COPY --from=ec-image /usr/local/bin/ec_darwin_amd64.gz /copies/ec
+COPY --from=ec-image /usr/local/bin/ec_darwin_arm64.gz /copies/ec
+COPY --from=ec-image /usr/local/bin/ec_linux_amd64.gz /copies/ec
+COPY --from=ec-image /usr/local/bin/ec_linux_arm64.gz /copies/ec
+COPY --from=ec-image /usr/local/bin/ec_linux_ppc64le.gz /copies/ec
+COPY --from=ec-image /usr/local/bin/ec_linux_s390x.gz /copies/ec
+COPY --from=ec-image /usr/local/bin/ec_windows_amd64.exe.gz /copies/ec
